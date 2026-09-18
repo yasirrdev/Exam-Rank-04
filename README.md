@@ -60,4 +60,4 @@ Completar los 7 ejercicios conocidos del **Rank 04** y mantener un repositorio l
 ## ⭐ Créditos
 
 - Subjects inspirados en el pool comunitario del **Exam Rank 04** de 42.
-- Traducción al español y soluciones por **Yasir Bel Maalem**.
+- Traducción al español y soluciones por @yasirrdev.
