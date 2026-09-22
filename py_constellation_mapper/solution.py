@@ -1,23 +1,13 @@
-def constellation_mapper(stars: list[tuple[int, int]]) -> list[str]:
-    if not stars:
-        return []
+def constellation_mapper(stars: list[tuple[int, int]], dim: int) -> list[str]:
 
-    max_x = 0
-    max_y = 0
-
-    for x, y in stars:
-        if x > max_x:
-            max_x = x
-        if y > max_y:
-            max_y = y
     constellation = []
-    fila = ["."] * (max_x + 1)
 
-    for _ in range(max_y + 1):
-        constellation.append(fila.copy())
+    for _ in range(dim):
+        constellation.append(["."] * dim)
 
-    for x, y in stars:
-        constellation[y][x] = "*"
+    for row, col in stars:
+        if 0 <= row < dim and 0 <= col < dim:
+            constellation[row][col] = "*"
 
     result = []
 
@@ -28,17 +18,11 @@ def constellation_mapper(stars: list[tuple[int, int]]) -> list[str]:
 
 
 if __name__ == "__main__":
-    tests = [
-        [(0, 0)],
-        [(0, 0), (2, 1)],
-        [(1, 1), (0, 2)],
-        [(2, 0), (0, 0), (1, 0)],
-        []
-    ]
 
-    for stars in tests:
-        print(f"Input: {stars}")
-        result = constellation_mapper(stars)
-        for row in result:
-            print(row)
-        print("-" * 20)
+    print(constellation_mapper([(0, 0), (1, 1), (2, 2)], 3))
+
+    print(constellation_mapper([(1, 1), (0, 1), (2, 1), (1, 0), (1, 2)], 3))
+
+    print(constellation_mapper([(0, 0), (5, 5)], 3))
+
+    print(constellation_mapper([(1, 0), (1, 1), (1, 2)], 3))

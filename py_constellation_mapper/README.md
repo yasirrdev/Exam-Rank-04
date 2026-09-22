@@ -1,61 +1,63 @@
 # 01 - py_constellation_mapper
 
 **Fichero a entregar:** `solution.py`
-**Funciones permitidas:** Ninguna en especial
+**Funciones permitidas:** Ninguna
 
 ## Enunciado
 
-Una constelación puede representarse mediante una lista de coordenadas `(x, y)` sobre una cuadrícula.
+Escribe una función que proyecte una constelación de estrellas en una cuadrícula y devuelva la representación visual como una lista de cadenas.
 
-Escribe una función que genere una representación de la constelación utilizando `*` para las estrellas y `.` para las posiciones vacías.
+La función debe:
 
-* El origen `(0, 0)` corresponde a la esquina **superior izquierda**.
-* La cuadrícula debe tener el **tamaño mínimo** necesario para contener todas las estrellas.
-* Si la lista está vacía, la función debe devolver una lista vacía.
-* Puedes asumir que todas las coordenadas son enteros mayores o iguales que `0`.
+* Recibir una lista de coordenadas de estrellas como tuplas **(fila, columna)**.
+* Recibir el tamaño de la cuadrícula `dim`.
+* Devolver una lista de cadenas de tamaño `dim`.
+* Representar las estrellas con `'*'` y las posiciones vacías con `'.'`.
+* Considerar `(0, 0)` como la esquina superior izquierda.
+* Ignorar las coordenadas fuera de los límites de la cuadrícula.
+* Manejar coordenadas duplicadas (una estrella solo aparece una vez).
 
 ## Prototipo
 
 ```python
-def constellation_mapper(stars: list[tuple[int, int]]) -> list[str]:
+def constellation_mapper(stars: list[tuple[int, int]], dim: int) -> list[str]:
 ```
 
 ## Ejemplos
 
 ```python
-constellation_mapper([(0, 0)])
-# ["*"]
+constellation_mapper([(0, 0), (1, 1), (2, 2)], 3)
+# ['*..', '.*.', '..*']
 ```
 
 ```python
-constellation_mapper([(0, 0), (2, 1)])
-# [
-#   "*..",
-#   "..*"
-# ]
+constellation_mapper([(1, 1), (0, 1), (2, 1), (1, 0), (1, 2)], 3)
+# ['.*.', '***', '.*.']
 ```
 
 ```python
-constellation_mapper([(1, 1), (0, 2)])
-# [
-#   "..",
-#   ".*",
-#   "*."
-# ]
+constellation_mapper([], 2)
+# ['..', '..']
 ```
 
 ```python
-constellation_mapper([(2, 0), (0, 0), (1, 0)])
-# [
-#   "***"
-# ]
+constellation_mapper([(0, 0), (0, 0), (1, 1)], 2)
+# ['*.', '.*']
 ```
 
 ```python
-constellation_mapper([])
-# []
+constellation_mapper([(0, 0), (5, 5)], 3)
+# ['*..', '...', '...']
 ```
 
-## Nota
+```python
+constellation_mapper([(1, 0), (1, 1), (1, 2)], 3)
+# ['...', '***', '...']
+```
 
-La función debe **devolver** una lista de cadenas. No debe imprimir el resultado.
+## Casos borde
+
+* `stars` puede estar vacío.
+* Puede haber coordenadas repetidas.
+* Las coordenadas fuera de la cuadrícula deben ignorarse.
+* La función debe **devolver** una lista de cadenas; no debe imprimir nada.
