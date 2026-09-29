@@ -2,38 +2,26 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
 
     if not packages:
         return []
-    indegree = {}
 
-    for package in packages:
-        indegree[package] = 0
+    indegree = {package: 0 for package in packages}
 
     for package in packages:
         for dependency in packages[package]:
             if dependency in packages:
                 indegree[package] += 1
 
-    queue = []
-
-    for package in indegree:
-        if indegree[package] == 0:
-            queue.append(package)
-
+    cola = [package for package in packages if indegree[package] == 0]
     result = []
-
-    while queue:
-        current = queue.pop(0)
+    while cola:
+        current = cola.pop(0)
         result.append(current)
 
         for package in packages:
             if current in packages[package]:
                 indegree[package] -= 1
                 if indegree[package] == 0:
-                    queue.append(package)
-
-    if len(result) != len(packages):
-        return []
-
-    return result
+                    cola.append(package)
+    return result if len(result) == len(packages) else []
 
 
 if __name__ == "__main__":
