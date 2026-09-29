@@ -11,22 +11,3 @@ def palindrome_partitioner(s: str) -> int:
                 dp[i] = 0 if j == 0 else min(dp[i], dp[j - 1] + 1)
 
     return dp[-1]
-
-
-if __name__ == "__main__":
-    tests = [
-        ("aab", 1),
-        ("racecar", 0),
-        ("abcbm", 2),
-        ("a", 0),
-        ("", 0),
-        ("banana", 1),
-        ("abc", 2),
-    ]
-
-    for s, expected in tests:
-        result = palindrome_partitioner(s)
-        print(f'"{s}"')
-        print(f"Result:   {result}")
-        print(f"Expected: {expected}")
-        print("-" * 30)
