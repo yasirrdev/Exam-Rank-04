@@ -6,7 +6,7 @@ def merge_sorted_lists(lists: list[list[int]]) -> list[int]:
         for num in lista:
             result.append(num)
 
-    return sorted(result)
+    return sorted(result) # NO SE PUEDE USAR SORTED
 
 
 if __name__ == "__main__":
