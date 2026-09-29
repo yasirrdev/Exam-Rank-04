@@ -13,14 +13,6 @@ def palindrome_partitioner(s: str) -> int:
     return dp[-1]
 
 
-def is_palindrome(s: str) -> bool:
-    p = ""
-    for i in s:
-        if i.isalnum():
-            p += i.lower()
-    return p == p[::-1]
-
-
 if __name__ == "__main__":
     tests = [
         ("aab", 1),
