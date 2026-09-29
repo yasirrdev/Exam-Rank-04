@@ -1,18 +1,10 @@
 def sliding_window_maximum(nums: list[int], k: int) -> list[int]:
-
-    if k > len(nums):
-        return []
-    if not nums or k <= 0 or k > len(nums):
+    if not nums or k <= 0:
         return []
 
-    result = []
+    iterations = len(nums) - k + 1
 
-    for i in range(0, len(nums) - k + 1):
-        window = nums[i: i+k]
-        maxn = max(window)
-        result.append(maxn)
-
-    return result
+    return [max(nums[i:i + k]) for i in range(iterations)]
 
 
 if __name__ == "__main__":
