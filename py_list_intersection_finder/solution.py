@@ -2,18 +2,12 @@ def list_intersection_finder(lists: list[list[int]]) -> list[int]:
     if not lists:
         return []
 
-    result = lists[0].copy()
+    result = set(lists[0])
 
     for lista in lists[1:]:
-        new_result = []
-        for num in result:
-            if num in lista:
-                new_result.append(num)
-        result = new_result
+        result &= set(lista)
 
-    result = list(set(result))
-    result.sort()
-    return result
+    return sorted(result)
 
 
 if __name__ == "__main__":
