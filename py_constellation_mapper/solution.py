@@ -1,28 +1,53 @@
 def constellation_mapper(stars: list[tuple[int, int]], dim: int) -> list[str]:
-
-    constellation = []
-
-    for _ in range(dim):
-        constellation.append(["."] * dim)
+    grid = [["."] * dim for _ in range(dim)]
 
     for row, col in stars:
         if 0 <= row < dim and 0 <= col < dim:
-            constellation[row][col] = "*"
+            grid[row][col] = "*"
 
-    result = []
-
-    for fila in constellation:
-        result.append("".join(fila))
-
-    return result
+    return ["".join(row) for row in grid]
 
 
 if __name__ == "__main__":
 
-    print(constellation_mapper([(0, 0), (1, 1), (2, 2)], 3))
+    tests = [
+        (
+            [(0, 0), (1, 1), (2, 2)],
+            3,
+            ["*..", ".*.", "..*"]
+        ),
+        (
+            [(1, 1), (0, 1), (2, 1), (1, 0), (1, 2)],
+            3,
+            [".*.", "***", ".*."]
+        ),
+        (
+            [],
+            2,
+            ["..", ".."]
+        ),
+        (
+            [(0, 0), (0, 0), (1, 1)],
+            2,
+            ["*.", ".*"]
+        ),
+        (
+            [(0, 0), (5, 5)],
+            3,
+            ["*..", "...", "..."]
+        ),
+        (
+            [(1, 0), (1, 1), (1, 2)],
+            3,
+            ["...", "***", "..."]
+        ),
+    ]
 
-    print(constellation_mapper([(1, 1), (0, 1), (2, 1), (1, 0), (1, 2)], 3))
+    for stars, dim, expected in tests:
+        result = constellation_mapper(stars, dim)
 
-    print(constellation_mapper([(0, 0), (5, 5)], 3))
-
-    print(constellation_mapper([(1, 0), (1, 1), (1, 2)], 3))
+        print(f"Input:    {stars}, dim={dim}")
+        print(f"Result:   {result}")
+        print(f"Expected: {expected}")
+        print(f"OK:       {result == expected}")
+        print("-" * 40)
