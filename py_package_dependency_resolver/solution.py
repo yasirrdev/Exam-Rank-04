@@ -1,5 +1,4 @@
 def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
-
     if not packages:
         return []
 
@@ -10,8 +9,10 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
             if dependency in packages:
                 indegree[package] += 1
 
-    cola = [package for package in packages if indegree[package] == 0]
+    cola = sorted([package for package in packages if indegree[package] == 0],
+                  key=lambda x: (len(x), x))
     result = []
+
     while cola:
         current = cola.pop(0)
         result.append(current)
@@ -21,4 +22,6 @@ def package_dependency_resolver(packages: dict[str, list[str]]) -> list[str]:
                 indegree[package] -= 1
                 if indegree[package] == 0:
                     cola.append(package)
+                    cola.sort(key=lambda x: (len(x), x))
+
     return result if len(result) == len(packages) else []
