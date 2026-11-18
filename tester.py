@@ -3,7 +3,7 @@ import importlib.util
 
 
 def load_solution(folder):
-    path = f"{folder}/s.py"
+    path = f"{folder}/solution.py"
 
     spec = importlib.util.spec_from_file_location(folder, path)
     module = importlib.util.module_from_spec(spec)
